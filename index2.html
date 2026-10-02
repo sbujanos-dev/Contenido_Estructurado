@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Archivo del underground: una historia editorial del rap nacido en internet, de MySpace a la nueva escena underground de 2026.">
+<title>ARCHIVO DEL UNDERGROUND — Rap nacido en internet, 2005–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,440;0,9..144,600;1,9..144,440&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14111a;
+    --bg-raised:#1b1720;
+    --fg:#ede7de;
+    --muted:#9a93a6;
+    --line:rgba(237,231,222,0.12);
+    --line-strong:rgba(237,231,222,0.22);
+    --accent:#ff5a1f;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:440;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--fg); outline-offset:3px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- layout shell ---------- */
+  .shell{display:grid; grid-template-columns:250px 1fr; min-height:100vh;}
+  @media (max-width:900px){ .shell{grid-template-columns:1fr;} }
+
+  /* ---------- rail nav ---------- */
+  .rail{
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+    border-right:1px solid var(--line);
+    padding:28px 22px;
+  }
+  @media (max-width:900px){
+    .rail{position:relative; height:auto; border-right:none; border-bottom:1px solid var(--line);
+      display:flex; flex-direction:column; padding:20px;}
+  }
+  .rail-brand{
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; line-height:1.2;
+    margin-bottom:6px;
+  }
+  .rail-brand span{display:block; font-family:'IBM Plex Mono',monospace; font-weight:400; font-size:0.68rem; color:var(--muted); letter-spacing:0.02em; margin-top:6px;}
+  .rail-axis{
+    margin:22px 0 26px; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--muted);
+    display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  }
+  .rail-axis b{color:var(--fg); font-weight:500;}
+  nav.eras{display:flex; flex-direction:column; gap:2px; margin-bottom:20px;}
+  nav.eras a{
+    display:block; text-decoration:none; padding:9px 0; border-bottom:1px solid transparent;
+    color:var(--muted); font-size:0.9rem;
+  }
+  nav.eras a .yr{display:block; font-family:'IBM Plex Mono',monospace; font-size:0.66rem; color:var(--muted); margin-bottom:2px;}
+  nav.eras a:hover, nav.eras a.active{color:var(--fg);}
+  nav.eras a.active .yr{color:var(--dot,var(--accent));}
+  nav.eras a.active{border-bottom-color:var(--line-strong);}
+  .rail-foot{margin-top:auto; padding-top:18px; font-family:'IBM Plex Mono',monospace; font-size:0.66rem; color:var(--muted); line-height:1.7;}
+  .rail-foot a{text-decoration:underline; text-decoration-color:var(--line-strong); text-underline-offset:3px;}
+
+  /* ---------- main ---------- */
+  main{min-width:0;}
+
+  header.hero{
+    padding:76px 0 56px; border-bottom:1px solid var(--line);
+  }
+  header.hero .wrap{padding:0 40px;}
+  @media (max-width:900px){ header.hero .wrap{padding:0 20px;} header.hero{padding:44px 0 40px;} }
+  .kicker{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--muted); margin-bottom:18px;}
+  h1.title{font-size:clamp(2.1rem,5vw,3.6rem); max-width:14ch; font-weight:400;}
+  h1.title em{font-style:italic; font-weight:300; color:var(--muted);}
+  p.lede{max-width:56ch; color:var(--muted); font-size:1.05rem; margin-top:22px;}
+  .hero-meta{display:flex; gap:32px; margin-top:38px; flex-wrap:wrap;}
+  .hero-meta div{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--muted);}
+  .hero-meta div b{display:block; color:var(--fg); font-size:1.3rem; font-family:'Fraunces',serif; font-weight:400; margin-bottom:2px;}
+
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  section .wrap{padding:0 40px;}
+  @media (max-width:900px){ section .wrap{padding:0 20px;} section{padding:44px 0;} }
+
+  .section-head{max-width:60ch; margin-bottom:38px;}
+  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem); font-weight:400;}
+  .section-head p{color:var(--muted); margin-top:12px;}
+
+  /* ---------- era block ---------- */
+  .era{ }
+  .era-head{display:grid; grid-template-columns:1fr; gap:14px; margin-bottom:34px;}
+  .era-range{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--dot);}
+  .era-title{font-size:clamp(1.7rem,3.4vw,2.5rem); font-weight:400; max-width:20ch;}
+  .era-copy{max-width:64ch; color:var(--muted); margin-top:6px;}
+
+  .artist-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:1px;
+    background:var(--line); border:1px solid var(--line); margin-top:28px;
+  }
+  .artist-card{
+    background:var(--bg); padding:22px 20px 24px; border-left:3px solid var(--dot);
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .cover{
+    width:100%; aspect-ratio:1/1; border-radius:var(--radius);
+    display:flex; align-items:flex-end; padding:12px;
+    font-family:'Fraunces',serif; color:rgba(20,17,26,0.86);
+  }
+  .cover .mono-initial{font-size:2.4rem; line-height:1; font-weight:600;}
+  .cover .album-yr{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:rgba(20,17,26,0.6); margin-top:4px;}
+  .artist-name{font-size:1.05rem;}
+  .artist-tag{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--muted);}
+  .artist-album{font-size:0.86rem; color:var(--fg); margin-top:2px;}
+  .artist-album .lbl{color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:0.64rem; display:block; margin-bottom:3px;}
+  .singles{list-style:none; padding:0; margin:6px 0 0; font-size:0.82rem; color:var(--muted);}
+  .singles li{padding:3px 0; border-top:1px solid var(--line);}
+  .singles li:first-child{border-top:none;}
+  .artist-note{font-size:0.8rem; color:var(--muted); margin-top:4px; line-height:1.5;}
+
+  /* ---------- mainstream transitions ---------- */
+  .trajectories{display:flex; flex-direction:column; gap:0; margin-top:10px;}
+  .trajectory{
+    display:grid; grid-template-columns:160px 1fr; gap:22px; padding:20px 0; border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .trajectory:last-child{border-bottom:1px solid var(--line);}
+  .trajectory h3{font-size:1.15rem; font-weight:440;}
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:0.78rem;}
+  .flow .step{background:var(--bg-raised); border:1px solid var(--line-strong); padding:6px 11px; border-radius:var(--radius); color:var(--fg);}
+  .flow .arrow{color:var(--muted);}
+
+  /* ---------- influence map ---------- */
+  .map-tree{margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:0.86rem;}
+  .map-tree ul{list-style:none; margin:0; padding-left:26px; border-left:1px solid var(--line-strong);}
+  .map-tree > ul{padding-left:0; border-left:none;}
+  .map-tree li{position:relative; padding:7px 0 7px 20px;}
+  .map-tree li::before{
+    content:""; position:absolute; left:0; top:19px; width:14px; height:1px; background:var(--line-strong);
+  }
+  .map-tree .node{color:var(--fg);}
+  .map-tree .node.root{color:var(--accent); font-size:1rem;}
+  .map-tree .node .tag{color:var(--muted); font-size:0.74rem; margin-left:8px;}
+
+  /* ---------- sources ---------- */
+  .sources-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:22px; margin-top:28px;}
+  .sources-grid h4{font-size:0.9rem; margin-bottom:10px;}
+  .sources-grid ul{list-style:none; margin:0; padding:0; font-size:0.84rem; color:var(--muted);}
+  .sources-grid li{padding:5px 0;}
+  .sources-grid a{text-decoration:none; border-bottom:1px solid var(--line-strong);}
+  .sources-grid a:hover{color:var(--fg);}
+
+  .note-box{
+    margin-top:36px; padding:18px 20px; border:1px solid var(--line-strong); background:var(--bg-raised);
+    font-size:0.84rem; color:var(--muted); max-width:70ch; border-radius:var(--radius);
+  }
+
+  footer{padding:36px 0 60px;}
+  footer .wrap{padding:0 40px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+  @media (max-width:900px){ footer .wrap{padding:0 20px;} }
+  footer p{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted); margin:0;}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============ RAIL / NAV ============ -->
+  <aside class="rail">
+    <div class="rail-brand">Archivo del Underground
+      <span>Rap nacido en internet · 2005—2026</span>
+    </div>
+    <div class="rail-axis">
+      <b>underground</b> → mainstream → <b>new underground</b>
+    </div>
+    <nav class="eras" id="eraNav" aria-label="Navegación por épocas">
+      <a href="#early-internet"><span class="yr">2005–2010</span>Early internet rap</a>
+      <a href="#cloud-rap"><span class="yr">2009–2014</span>Cloud rap</a>
+      <a href="#soundcloud"><span class="yr">2014–2019</span>SoundCloud rap</a>
+      <a href="#post-soundcloud"><span class="yr">2019–2022</span>Post-SoundCloud</a>
+      <a href="#rage"><span class="yr">2020–2022</span>Rage</a>
+      <a href="#new-underground"><span class="yr">2022–2026</span>New internet underground</a>
+      <a href="#mainstream"><span class="yr">—</span>Underground → mainstream</a>
+      <a href="#map"><span class="yr">—</span>Mapa de influencias</a>
+      <a href="#fuentes"><span class="yr">—</span>Fuentes</a>
+    </nav>
+    <div class="rail-foot">
+      Documento editorial construido a partir de discografías públicas, prensa musical y plataformas de streaming. Ver <a href="#fuentes">fuentes</a>.
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+
+    <header class="hero">
+      <div class="wrap">
+        <div class="kicker">Un archivo editorial e interactivo</div>
+        <h1 class="title">El rap que nació<br>en internet<em>, 2005–2026</em></h1>
+        <p class="lede">De los foros, MySpace y las mixtapes de DatPiff al cloud rap, la explosión de SoundCloud, el rage y las microescenas actuales de Discord y TikTok: cómo el underground se transformó en mainstream — y volvió a transformarse.</p>
+        <div class="hero-meta">
+          <div><b>6</b>épocas documentadas</div>
+          <div><b>30</b>artistas y colectivos</div>
+          <div><b>7</b>trayectorias al mainstream</div>
+          <div><b>21</b>años de archivo</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="eras-root">
+      <div class="wrap" id="erasContainer"><!-- JS injecta las 6 épocas --></div>
+    </section>
+
+    <!-- ============ UNDERGROUND -> MAINSTREAM ============ -->
+    <section id="mainstream">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Underground → mainstream</h2>
+          <p>El underground no desaparece cuando llega al mainstream: se transforma y genera nuevas escenas. Siete trayectorias que muestran ese salto — de las mixtapes gratuitas a la cultura global.</p>
+        </div>
+        <div class="trajectories" id="trajectoriesContainer"><!-- JS injecta --></div>
+      </div>
+    </section>
+
+    <!-- ============ MAPA DE INFLUENCIAS ============ -->
+    <section id="map">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Mapa de influencias</h2>
+          <p>Una lectura genealógica de cómo un solo nodo — Lil B y el internet rap temprano — se ramifica en el cloud rap, SoundCloud, el rage y la nueva escena underground.</p>
+        </div>
+        <div class="map-tree" id="mapTree"><!-- JS injecta --></div>
+      </div>
+    </section>
+
+    <!-- ============ FUENTES ============ -->
+    <section id="fuentes" style="border-bottom:none;">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Fuentes y cómo seguir investigando</h2>
+          <p>Este archivo se construyó cruzando discografías, crítica musical y plataformas donde esta escena realmente vive. Para profundizar en cada artista, estas son las categorías de fuente recomendadas.</p>
+        </div>
+        <div class="sources-grid">
+          <div>
+            <h4>Discografía y crítica</h4>
+            <ul>
+              <li><a href="https://www.allmusic.com" target="_blank" rel="noopener">AllMusic</a></li>
+              <li><a href="https://www.albumoftheyear.org" target="_blank" rel="noopener">Album of the Year</a></li>
+              <li><a href="https://rateyourmusic.com" target="_blank" rel="noopener">RateYourMusic</a></li>
+              <li><a href="https://pitchfork.com" target="_blank" rel="noopener">Pitchfork</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Archivo de mixtapes</h4>
+            <ul>
+              <li><a href="https://www.datpiff.com" target="_blank" rel="noopener">DatPiff</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Internet_rap" target="_blank" rel="noopener">Wikipedia — internet rap</a></li>
+              <li><a href="https://www.thefader.com" target="_blank" rel="noopener">The Fader</a></li>
+              <li><a href="https://www.complex.com/music" target="_blank" rel="noopener">Complex Music</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Escucha y streaming</h4>
+            <ul>
+              <li><a href="https://open.spotify.com" target="_blank" rel="noopener">Spotify</a></li>
+              <li><a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a></li>
+              <li><a href="https://music.apple.com" target="_blank" rel="noopener">Apple Music</a></li>
+              <li><a href="https://www.youtube.com" target="_blank" rel="noopener">YouTube</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Comunidad y cultura</h4>
+            <ul>
+              <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+              <li><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a href="https://twitter.com" target="_blank" rel="noopener">X / Twitter</a></li>
+              <li><a href="https://discord.com" target="_blank" rel="noopener">Discord</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="note-box">
+          Nota de diseño: las «portadas» y avatares de este archivo son tratamientos tipográficos originales por época — no fotografías ni artes de disco reales — para respetar los derechos de imagen de cada artista y sello. Cada tarjeta enlaza conceptualmente a su álbum y singles reales; búscalos en las plataformas listadas arriba para escuchar y ver el arte oficial.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <p>Archivo del Underground — documento editorial, no oficial.</p>
+        <p>Actualizado 2026 · Datos verificados contra discografías públicas</p>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+/* ======================================================================
+   DATOS — cada época y sus 5 artistas más destacados
+   ====================================================================== */
+const ERAS = [
+  {
+    id: "early-internet",
+    range: "2005–2010",
+    title: "Early internet rap",
+    accent: "#c98a3b",
+    copy: "Antes de que existiera una \"industria\" del rap en internet, hubo foros, perfiles de MySpace y canales de YouTube subiendo freestyles caseros. DatPiff y los blogs de mixtapes democratizaron la distribución: cualquiera con una laptop podía tener una carrera. Lil B y Odd Future son los dos polos de esta era — la prolificidad infinita frente al colectivo autoproducido que se convirtió en su propia industria.",
+    artists: [
+      { name:"Lil B", tag:"Based God · Berkeley, CA", album:"Angels Exodus", year:"2012",
+        singles:["I'm God","Wonton Soup","Ellen DeGeneres"],
+        note:"Cientos de mixtapes gratuitas en MySpace y DatPiff sentaron el ADN DIY de todo el internet rap posterior." },
+      { name:"Tyler, The Creator", tag:"Odd Future · Los Ángeles", album:"IGOR", year:"2019",
+        singles:["EARFQUAKE","See You Again","Yonkers"],
+        note:"El video casero de \"Yonkers\" en YouTube convirtió a Odd Future en fenómeno de blog antes de su giro pop." },
+      { name:"Odd Future", tag:"Colectivo · Los Ángeles", album:"The OF Tape Vol. 2", year:"2012",
+        singles:["Oldie","Rella","NY (Ned Flander)"],
+        note:"Mixtapes autoeditadas y un foro propio construyeron uno de los primeros fandoms verdaderamente nativos de internet." },
+      { name:"SpaceGhostPurrp", tag:"Raider Klan · Miami", album:"Mysterious Phonk: The Chronicles of SpaceGhostPurrp", year:"2012",
+        singles:["Grind Mode","Bringin Real Rap Back","Blackland"],
+        note:"El phonk lo-fi de Raider Klan, repartido en foros, influyó directamente el sonido A$AP y el cloud rap temprano." },
+      { name:"Clams Casino", tag:"Productor · New Jersey", album:"32 Levels", year:"2016",
+        singles:["I'm God (prod.)","Motivation (prod.)","Palace (prod.)"],
+        note:"Sus beats de reverb infinito, regalados en packs de blog, inventaron literalmente la textura del cloud rap." },
+    ]
+  },
+  {
+    id: "cloud-rap",
+    range: "2009–2014",
+    title: "Cloud rap",
+    accent: "#8fa8c9",
+    copy: "Sonidos atmosféricos, melancólicos y lo-fi: el ambient, el chopped & screwed, el anime y la estética Tumblr se cuelan en el rap. Suecia (Yung Lean, Sad Boys) y Oakland (Main Attrakionz) dialogan a distancia con Harlem (A$AP Mob), todos conectados por los mismos beats de Clams Casino que flotan sin gravedad.",
+    artists: [
+      { name:"Yung Lean", tag:"Sad Boys · Estocolmo", album:"Stranger", year:"2017",
+        singles:["Ginseng Strip 2002","Yoshi City","Red Bottom Sky"],
+        note:"Meme viral convertido en proyecto artístico serio; abrió la puerta a toda la escena escandinava posterior, incluido Drain Gang." },
+      { name:"A$AP Rocky", tag:"A$AP Mob · Harlem", album:"Long.Live.A$AP", year:"2013",
+        singles:["Fuckin' Problems","Goldie","Praise the Lord (Da Shine)"],
+        note:"Mixtapes de A$AP Mob + estética cloud + moda de pasarela: el primer gran puente hacia el mainstream." },
+      { name:"Main Attrakionz", tag:"Green Ova · Oakland", album:"808s & Dark Grapes II", year:"2012",
+        singles:["Perfect Skies","Chuch","Namesake"],
+        note:"Junto a Clams Casino, definieron el cloud rap como género propio antes de que tuviera nombre en la prensa." },
+      { name:"Bladee", tag:"Drain Gang · Estocolmo", album:"Icedancer", year:"2021",
+        singles:["Be Nice 2 Me","5% Tint","Red Light"],
+        note:"Heredero directo de Yung Lean; su melancolía digital y estética glitch fundan la rama Drain Gang del mapa." },
+      { name:"Earl Sweatshirt", tag:"Odd Future · Los Ángeles", album:"Some Rap Songs", year:"2018",
+        singles:["Nowhere2go","Chum","Riot!"],
+        note:"Del shock-rap adolescente a la introspección lo-fi más críticamente celebrada de la década." },
+    ]
+  },
+  {
+    id: "soundcloud",
+    range: "2014–2019",
+    title: "SoundCloud rap",
+    accent: "#ff5a1f",
+    copy: "SoundCloud reemplaza al blog: subir una canción y que se vuelva viral en horas, sin sello ni prensa. Nace una estética compartida — pelo de colores, tatuajes faciales, producción saturada — y una generación entera de adolescentes que se vuelven estrellas antes de graduarse de high school.",
+    artists: [
+      { name:"Lil Uzi Vert", tag:"Filadelfia", album:"Luv Is Rage 2", year:"2017",
+        singles:["XO Tour Llif3","Money Longer","The Way Life Goes"],
+        note:"De las mixtapes SoundCloud a colaborar con casas de moda de lujo: uno de los cruces más rápidos al mainstream." },
+      { name:"XXXTentacion", tag:"Members Only · Florida", album:"?", year:"2018",
+        singles:["SAD!","Moonlight","Jocelyn Flores"],
+        note:"Viralidad, polémica y un debut #1 en Billboard: la trayectoria más discutida de toda la era SoundCloud." },
+      { name:"Lil Peep", tag:"GothBoiClique · Long Beach", album:"Come Over When You're Sober, Pt. 1", year:"2017",
+        singles:["Awful Things","Benz Truck (гелик)","Star Shopping"],
+        note:"Fusionó emo, pop-punk y trap en SoundCloud; hoy es referencia obligada del emo rap y su legado sigue creciendo." },
+      { name:"Denzel Curry", tag:"Miami", album:"Melt My Eyez See Your Future", year:"2022",
+        singles:["Walkin","Ultimate","Clout Cobain"],
+        note:"Desde el Raider Klan hasta la crítica especializada: una de las carreras más consistentes del underground de Florida." },
+      { name:"Lil Yachty", tag:"Sailing Team · Atlanta", album:"Let's Start Here.", year:"2023",
+        singles:["One Night","Poland","the ride-"],
+        note:"De \"Minnesota\" viral en SoundCloud a un giro hacia el rock psicodélico aclamado por la crítica años después." },
+    ]
+  },
+  {
+    id: "post-soundcloud",
+    range: "2019–2022",
+    title: "Post-SoundCloud",
+    accent: "#35c7a0",
+    copy: "La música deja de vivir en una sola plataforma. Un mismo tema circula simultáneamente por TikTok, Instagram, YouTube, Spotify, SoundCloud, Discord y Twitter/X — y el algoritmo, no el blog, decide qué se vuelve viral.",
+    artists: [
+      { name:"Juice WRLD", tag:"Chicago", album:"Goodbye & Good Riddance", year:"2018",
+        singles:["Lucid Dreams","All Girls Are the Same","Robbery"],
+        note:"Freestyles virales en Clubhouse y SoundCloud lo llevaron a ser una de las superestrellas post-SoundCloud más influyentes." },
+      { name:"$uicideboy$", tag:"G*59 · Nueva Orleans", album:"I Want to Die in New Orleans", year:"2018",
+        singles:["Kill Yourself (Part III)","Paris","War Ready"],
+        note:"Su propio sello independiente demostró que se podía saltar del underground total a giras masivas sin un sello mayor." },
+      { name:"Trippie Redd", tag:"Ohio", album:"A Love Letter to You 3", year:"2019",
+        singles:["Topanga","Love Scars","Taking a Walk"],
+        note:"Puente constante entre el emo rap de SoundCloud y las colaboraciones mainstream de la era del streaming múltiple." },
+      { name:"Ski Mask the Slump God", tag:"Members Only · Florida", album:"Stokeley", year:"2019",
+        singles:["Catch Me Outside","Faucet Failure","Nuketown"],
+        note:"Energía de meme y flow acrobático que sobrevivió el salto de SoundCloud a las listas de streaming globales." },
+      { name:"JPEGMAFIA", tag:"Baltimore", album:"LP!", year:"2021",
+        singles:["Baby I'm Bleeding","Rap Grow Old & Die x No Child Left Behind","Kenan vs. Kel"],
+        note:"Producción experimental y ruidista distribuida directamente en redes, sin concesiones al formato radio." },
+    ]
+  },
+  {
+    id: "rage",
+    range: "2020–2022",
+    title: "Rage",
+    accent: "#e8323f",
+    copy: "El trap se vuelve digital, agresivo y saturado. Playboi Carti y su sello Opium reescriben las reglas con voces distorsionadas y producción casi de videojuego; Lil Uzi Vert y la influencia del EDM terminan de definir un sonido hecho para el mosh pit.",
+    artists: [
+      { name:"Playboi Carti", tag:"Opium · Atlanta", album:"Whole Lotta Red", year:"2020",
+        singles:["Magnolia","Sky","Location"],
+        note:"Whole Lotta Red es el disco fundacional del rage: polarizante al salir, hoy considerado su piedra angular." },
+      { name:"Yeat", tag:"Portland", album:"2 Alivë", year:"2022",
+        singles:["Get Busy","Money So Big","Rich Now"],
+        note:"Su propio vocabulario y estética (\"Yeat-ify\") demuestran cómo el rage generó su propio ecosistema visual y lingüístico." },
+      { name:"Ken Carson", tag:"Opium · Atlanta", album:"A Great Chaos", year:"2023",
+        singles:["Fighting My Demons","Jennifer's Body","Overseas"],
+        note:"Del roster de Opium a llenar arenas: uno de los herederos directos del molde de Carti." },
+      { name:"Destroy Lonely", tag:"Opium · Atlanta", album:"If Looks Could Kill", year:"2023",
+        singles:["NOSTYLIST","SUPERNova","Bane"],
+        note:"Estética de moda y producción minimalista y distorsionada, muy influyente en la microescena que vino después." },
+      { name:"Homixide Gang", tag:"Opium · Atlanta", album:"i5u5we5", year:"2024",
+        singles:["5unna","R50","HI-VOLTAGE"],
+        note:"Dúo underground de Atlanta fichado por Opium; su estética enmascarada y caótica alimenta directamente el new underground." },
+    ]
+  },
+  {
+    id: "new-underground",
+    range: "2022–2026",
+    title: "New internet underground",
+    accent: "#ff3ea0",
+    copy: "Una escena fragmentada en microescenas: jerk, digicore, plugg oscuro y rage de segunda generación, todo coordinado en Discord y explotando en TikTok antes de llegar a Spotify. Es la generación que creció dentro del rage, no descubriéndolo.",
+    artists: [
+      { name:"OsamaSon", tag:"Slime Krew · Carolina del Sur", album:"Psykotic", year:"2025",
+        singles:["Troops","The Whole World Is Free","Withdrawals"],
+        note:"De subir temas a SoundCloud en 2021 a debutar en Billboard: uno de los casos más rápidos de la nueva escena." },
+      { name:"Nettspend", tag:"Richmond, Virginia", album:"Early Life Crisis", year:"2026",
+        singles:["Shine N Peace","Drankdrankdrank","40"],
+        note:"Abandonó la escuela para subir música a SoundCloud; hoy es una de las figuras centrales del sonido \"jerk\"." },
+      { name:"Xaviersobased", tag:"1c34 / Surf Gang · Nueva York", album:"Xavier", year:"2026",
+        singles:["40","iPhone 16","Worth It"],
+        note:"Productor y rapero prolífico desde los 12 años; pionero del subgénero jerk dentro del new underground." },
+      { name:"Jane Remover", tag:"DeadAir · Nueva Jersey", album:"Census Designated", year:"2023",
+        singles:["Census Designated","Lips","Contingency Song"],
+        note:"Del digicore de Discord al shoegaze experimental; una de las voces más críticamente respetadas de esta generación." },
+      { name:"Smokedope2016", tag:"Virginia Beach", album:"THE PEAK", year:"2025",
+        singles:["Slow Down","Goyard","XTC"],
+        note:"Heredero directo de Yung Lean y Clams Casino: demuestra que el cloud rap original sigue vivo dentro del new underground." },
+    ]
+  },
+];
+
+/* ======================================================================
+   TRAYECTORIAS UNDERGROUND -> MAINSTREAM
+   ====================================================================== */
+const TRAJECTORIES = [
+  { name:"A$AP Rocky", steps:["Underground","A$AP Mob / mixtapes","Mainstream","Moda / cultura global"] },
+  { name:"Lil Uzi Vert", steps:["SoundCloud / mixtapes","Viralidad","Moda","Mainstream"] },
+  { name:"Lil Yachty", steps:["SoundCloud","Viralidad","Memes","Mainstream"] },
+  { name:"XXXTentacion", steps:["SoundCloud","Viralidad","Polémicas","Éxito global"] },
+  { name:"Lil Peep", steps:["SoundCloud / mixtapes","Emo rap","Ícono cultural"] },
+  { name:"Juice WRLD", steps:["SoundCloud","Viralidad","Superestrella"] },
+  { name:"Playboi Carti", steps:["SoundCloud","Playboi Carti","Die Lit","Whole Lotta Red","Fenómeno cultural"] },
+];
+
+/* ======================================================================
+   MAPA DE INFLUENCIAS (árbol)
+   ====================================================================== */
+const MAP = {
+  node:"LIL B", tag:"early internet rap", children:[
+    { node:"CLOUD RAP", children:[
+      { node:"YUNG LEAN", children:[
+        { node:"DRAIN GANG", tag:"Bladee, Ecco2k" }
+      ]},
+      { node:"A$AP ROCKY", tag:"A$AP Mob" },
+    ]},
+    { node:"INTERNET RAP", children:[
+      { node:"SOUNDCLOUD", children:[
+        { node:"XXXTENTACION" },
+        { node:"LIL UZI VERT" },
+        { node:"PLAYBOI CARTI", children:[
+          { node:"RAGE", children:[
+            { node:"YEAT" },
+            { node:"KEN CARSON" },
+            { node:"DESTROY LONELY" },
+            { node:"HOMIXIDE GANG", children:[
+              { node:"NEW UNDERGROUND", children:[
+                { node:"OSAMASON" },
+                { node:"NETTSPEND" },
+                { node:"XAVIERSOBASED" },
+                { node:"CHE" },
+                { node:"SLAYR" },
+                { node:"LUCY BEDROQUE" },
+                { node:"FAKEMINK" },
+                { node:"PRETTIFUN" },
+                { node:"BLEOOD" },
+              ]}
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ]
+};
+
+/* ======================================================================
+   RENDER
+   ====================================================================== */
+function initials(name){
+  return name.replace(/[^A-Za-z0-9À-ÿ$ ]/g," ").trim().split(/\s+/).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+}
+
+function coverGradient(hex, seed){
+  // Deriva un segundo tono a partir del acento de la época + una semilla por artista
+  let h = 0; for(let i=0;i<seed.length;i++) h = (h*31 + seed.charCodeAt(i)) % 360;
+  return `linear-gradient(155deg, ${hex} 0%, hsl(${h},48%,22%) 100%)`;
+}
+
+function renderEras(){
+  const container = document.getElementById('erasContainer');
+  ERAS.forEach(era => {
+    const section = document.createElement('article');
+    section.className = 'era';
+    section.id = era.id;
+    section.style.setProperty('--dot', era.accent);
+
+    const cardsHtml = era.artists.map(a => `
+      <article class="artist-card" style="--dot:${era.accent}">
+        <div class="cover" style="background:${coverGradient(era.accent, a.name)}">
+          <div>
+            <div class="mono-initial">${initials(a.name)}</div>
+            <div class="album-yr">${a.year}</div>
+          </div>
+        </div>
+        <div class="artist-name">${a.name}</div>
+        <div class="artist-tag">${a.tag}</div>
+        <div class="artist-album"><span class="lbl">Álbum destacado</span>${a.album} <span class="mono" style="color:var(--muted)">(${a.year})</span></div>
+        <ul class="singles">
+          ${a.singles.map(s=>`<li>${s}</li>`).join("")}
+        </ul>
+        <p class="artist-note">${a.note}</p>
+      </article>
+    `).join("");
+
+    section.innerHTML = `
+      <div class="era-head">
+        <div class="era-range mono">${era.range}</div>
+        <h2 class="era-title">${era.title}</h2>
+        <p class="era-copy">${era.copy}</p>
+      </div>
+      <div class="artist-grid">${cardsHtml}</div>
+    `;
+    container.appendChild(section);
+  });
+}
+
+function renderTrajectories(){
+  const container = document.getElementById('trajectoriesContainer');
+  container.innerHTML = TRAJECTORIES.map(t => `
+    <div class="trajectory">
+      <h3>${t.name}</h3>
+      <div class="flow">
+        ${t.steps.map((s,i)=> (i>0 ? `<span class="arrow">→</span>` : "") + `<span class="step">${s}</span>`).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderMapNode(n, isRoot){
+  const tag = n.tag ? `<span class="tag">${n.tag}</span>` : "";
+  const childrenHtml = n.children ? `<ul>${n.children.map(c=>renderMapNode(c,false)).join("")}</ul>` : "";
+  return `<li><div class="node ${isRoot?'root':''}">${n.node}${tag}</div>${childrenHtml}</li>`;
+}
+
+function renderMap(){
+  const container = document.getElementById('mapTree');
+  container.innerHTML = `<ul>${renderMapNode(MAP, true)}</ul>`;
+}
+
+function initNavHighlight(){
+  const links = document.querySelectorAll('#eraNav a');
+  const ids = Array.from(links).map(a=>a.getAttribute('href').slice(1));
+  const targets = ids.map(id=>document.getElementById(id)).filter(Boolean);
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const link = document.querySelector(`#eraNav a[href="#${entry.target.id}"]`);
+      if(!link) return;
+      if(entry.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+        const eraData = ERAS.find(e=>e.id===entry.target.id);
+        document.documentElement.style.setProperty('--dot', eraData ? eraData.accent : '#ff5a1f');
+      }
+    });
+  }, { rootMargin: "-40% 0px -50% 0px" });
+  targets.forEach(t=>obs.observe(t));
+}
+
+renderEras();
+renderTrajectories();
+renderMap();
+initNavHighlight();
+</script>
+</body>
+</html>

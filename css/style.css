@@ -10,10 +10,8 @@
 :root {
   --color-background: #f4f4f0;
   --color-text: #171717;
-  --color-accent: #5b3df5;
-
+  --color-accent: #134aa1;
   --font-family-base: system-ui, Arial, Helvetica, sans-serif;
-
   --font-size-body: 1rem;
   --font-size-h1: 3rem;
   --font-size-h2: 2rem;
@@ -30,11 +28,6 @@
 
 * {
   box-sizing: border-box;
-  /*
-    Regla temporal para visualizar las cajas.
-    Puede eliminarse cuando ya no sea necesaria.
-  */
-  outline: 1px solid;
 }
 
 
@@ -47,12 +40,13 @@
 */
 body {
   margin: 0;
-
   background-color: var(--color-background);
   color: var(--color-text);
-
   font-family: var(--font-family-base);
   font-size: var(--font-size-body);
+  padding: 0;
+  font-weight: 700;
+  line-height: 1.6em;
 }
 
 /*
@@ -105,6 +99,45 @@ a {
   distribuye el espacio horizontal y centra la caja.
 */
 
+header#header-home{
+  width: 100%;
+  height: 100vh;
+  background-image: url(../img/cielo.jpg);
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  align-content: center;
+}
+#header-home h1 {opacity: 0;position: absolute;}
+#header-home p {
+  max-width: 540px;
+  margin: 0 auto;
+  text-wrap: balance;
+  font-weight: 900;
+}
+#header-home a{
+  background: var(--color-accent);
+    color: var(--color-background);
+    display: inline-block;
+    width: 292px;
+    margin: 1em auto 0em auto;
+    padding: .5em 1em;
+}
+.nav-link {
+  background: black;
+  color: var(--color-background);
+  display: inline-block;
+  width: 300;
+  margin: 1em auto 0em auto;
+  padding: .5em 1em;
+  height: 10;
+}
 main {
   width: 65%;
   min-width: 290px;
@@ -112,14 +145,24 @@ main {
   margin: 0 auto;
 }
 
-
+#main-nav{
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  align-content: center;
+  padding: 3em 0;
+}
 /*
   ============================================================
   ESPACIADO BÁSICO
   ============================================================
 */
-
-header,
 main,
 footer {
   padding: 2rem;
@@ -127,8 +170,31 @@ footer {
 
 section {
   margin-bottom: 3rem;
+  text-align: center;
 }
 
 nav a {
   margin-right: 1rem;
+}
+
+
+.header-artist {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.header-artist p,
+.header-artist h1 {
+  background: #000;
+  color: #fff;
+  display: inline-block;
+  margin: .25em 0 1em 0;
+  padding: 0.2em 1em;
+  line-height: 1em;
+  margin-bottom: 1em;
+}
+
+
+.header-artist p {
+  margin: .2em auto;
 }
